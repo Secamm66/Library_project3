@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show people</title>
+</head>
+<body>
+<p style="font-size: 18px"
+   th:text="${person.getName() + ', ' + person.getYearOfBirth()}">VALUE</p>
+
+<div th:if="${!books.isEmpty()}">
+    <hr/>
+    <p style="font-size: 18px; font-weight: bold">Книги:</p>
+    <ul>
+        <li th:each="book : ${books}"
+            th:style="'font-size: 18px;' + (${book.isOverdue()} ? ' color: red;' : '')"
+            th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">books
+        </li>
+    </ul>
+</div>
+<div th:if="${books.isEmpty()}">
+    <p style="font-size: 18px">Читатель пока не взял ни одной книги</p>
+</div>
+
+<hr/>
+
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getPersonId()})}" style="margin-bottom: 5px;">
+    <input type="submit" value="Редактировать читателя"/>
+</form>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPersonId()})}">
+    <input type="submit" value="Удалить читателя" style="margin-bottom: 10px;"/>
+</form>
+<form th:method="GET" th:action="@{/books/}" style="margin-bottom: 5px;">
+    <input type="submit" value="К списку книг"/>
+</form>
+<form th:method="GET" th:action="@{/people}">
+    <input type="submit" value="К списку читателей"/>
+</form>
+</body>
+</html>

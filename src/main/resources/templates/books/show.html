@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show books</title>
+</head>
+<body>
+<p style="font-size: 18px"
+   th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">VALUE</p>
+
+<div th:if="${person_details.isAdmin()}">
+    <div th:if="${people}">
+        <p style="font-size: 18px">Эта книга свободна. Кому назначить её?</p>
+        <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getBookId()})}" th:object="${person}">
+            <label for="person">Выберите читателя:</label>
+            <select th:object="${person}" th:field="*{personId}" id="person">
+                <option th:each="person : ${people}" th:value="${person.getPersonId()}"
+                        th:text="${person.getName()}">
+                </option>
+            </select>
+            <input type="submit" value="Назначить книгу"/>
+        </form>
+    </div>
+
+    <div th:if="${owner}">
+        <span style="font-size: 18px; margin-bottom: 5px; display: inline-block">Книга сейчас у: </span>
+        <span style="font-size: 18px" th:text="${owner.getName()}">VALUE</span>
+        <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getBookId()})}" th:object="${book}">
+            <input type="submit" value="Освободить книгу"/>
+        </form>
+    </div>
+
+    <hr/>
+
+    <form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getBookId()})}" style="margin-bottom: 5px;">
+        <input type="submit" value="Редактировать книгу"/>
+    </form>
+
+    <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getBookId()})}">
+        <input type="submit" value="Удалить книгу" style="margin-bottom: 10px;"/>
+    </form>
+
+    <form th:method="GET" th:action="@{/people}" style="margin-bottom: 5px;">
+        <input type="submit" value="К списку читателей"/>
+    </form>
+
+    <form th:method="GET" th:action="@{/books/}">
+        <input type="submit" value="К списку книг"/>
+    </form>
+</div>
+
+
+<div th:if="${!person_details.isAdmin()}">
+    <div th:if="${people}" style="font-size: 18px">Эта книга свободна. Обратитесь к администратору для её получения
+    </div>
+
+    <div th:if="${owner}" style="font-size: 18px">Эта книга сейчас занята</div>
+
+    <hr/>
+
+    <form th:method="GET" th:action="@{/books/}">
+        <input type="submit" value="К списку книг"/>
+    </form>
+</div>
+</body>
+</html>

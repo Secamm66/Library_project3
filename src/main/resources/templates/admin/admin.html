@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body>
+
+<p style="font-size: 18px">Привет, Админ! Давай админь!</p>
+
+<form th:method="GET" th:action="@{/books}">
+    <input type="submit" value="Книги" style="margin-bottom: 5px;"/>
+</form>
+
+<form th:method="GET" th:action="@{/people}">
+    <input type="submit" value="Читатели" style="margin-bottom: 5px;"/>
+</form>
+
+<form th:method="GET" th:action="@{/admin/admins}">
+    <input type="submit" value="Администраторы" style="margin-bottom: 5px;"/>
+</form>
+
+<form th:method="POST" th:action="@{/auth/logout}">
+    <input type="submit" value="Выход" style="margin-bottom: 5px;"/>
+</form>
+
+</body>
+</html>

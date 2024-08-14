@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+<div style="font-size: 18px" th:text="'Здравствуйте, ' + ${user.getName()} + ', рады видеть Вас в нашей сельской библиотеке!'"></div>
+
+<form th:method="GET" th:action="@{/books}">
+    <input type="submit" value="К списку книг" style="margin-bottom: 5px;"/>
+</form>
+
+<form th:method="POST" th:action="@{/auth/logout}">
+    <input type="submit" value="Выход" style="margin-bottom: 5px;"/>
+</form>
+
+</body>
+</html>

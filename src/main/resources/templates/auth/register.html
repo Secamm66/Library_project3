@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New person_account</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/auth/register}" th:object="${person}">
+ <label for="username" style="font-size: 18px">Введите имя пользователя: </label>
+    <input type="text" th:field="*{personAccount.username}" id="username"/>
+     <div style="color:red" th:if="${#fields.hasErrors('personAccount.username')}" th:errors="*{personAccount.username}">Username Error</div>
+     <br/>
+     <label for="password" style="font-size: 18px">Введите пароль: </label>
+     <input type="password" th:field="*{personAccount.password}" id="password"/>
+     <div style="color:red" th:if="${#fields.hasErrors('personAccount.password')}" th:errors="*{personAccount.password}">Password Error</div>
+     <br/>
+     <label for="name" style="font-size: 18px">Введите ФИО: </label>
+     <input type="text" th:field="*{name}" id="name"/>
+     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+     <br/>
+     <label for="yearOfBirth" style="font-size: 18px">Введите год рождения: </label>
+     <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth" style="margin-bottom: 5px;"/>
+     <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">yearOfBirth Error</div>
+     <br/>
+     <label for="email" style="font-size: 18px">Введите email: </label>
+     <input type="text" th:field="*{personAccount.email}" id="email"/>
+     <div style="color:red" th:if="${#fields.hasErrors('personAccount.email')}" th:errors="*{personAccount.email}">Email Error</div>
+     <br/>
+     <input type="submit" value="Зарегистрировать"/>
+ </form>
+
+ </body>
+ </html>
