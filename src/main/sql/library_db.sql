@@ -1,4 +1,4 @@
--- SQL код для создания таблиц;
+﻿-- SQL код для создания таблиц;
 
 CREATE DATABASE library_db;
 
@@ -23,5 +23,6 @@ CREATE TABLE person_account
     username  varchar(100) NOT NULL UNIQUE,
     password  varchar(100) NOT NULL,
     email     varchar(100) NOT NULL UNIQUE,
-    person_id int UNIQUE REFERENCES person (person_id) ON DELETE CASCADE
+    person_id int UNIQUE REFERENCES person (person_id) ON DELETE CASCADE,
+    role varchar(100) NOT NULL
 );
